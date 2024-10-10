@@ -25,8 +25,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.coffeeshop.CommentsView
 import com.example.coffeeshops.ui.theme.CoffeeShopsTheme
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,25 +35,30 @@ class MainActivity : ComponentActivity() {
         setContent {
             CoffeeShopsTheme {
                 val navController = rememberNavController()
+
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = { TopAppBar() }
-                ) { innerPadding ->
+                ) {
+                        innerPadding ->
                     NavHost(
                         navController = navController,
                         startDestination = "Cards",
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable("Cards") {
-                            Cards(navController)
+                            Cards(navController = navController)
+                        }
+                        composable("CommentsView/{cafeIndex}") {
+                                backStackEntry ->
+                            val cafeIndex = backStackEntry.arguments?.getString("cafeIndex")?.toInt() ?: 0
+                            CommentsView(navController = navController, cafeIndex = cafeIndex)
                         }
                     }
                 }
             }
         }
     }
-}
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,7 +82,7 @@ fun TopAppBar() {
                 colors = IconButtonDefaults.iconButtonColors(
                     contentColor = MaterialTheme.colorScheme.secondary
                 ),
-                onClick = { /* do something */ }
+                onClick = {}
             ) {
                 Icon(
                     imageVector = Icons.Filled.Menu,
@@ -90,7 +95,10 @@ fun TopAppBar() {
                 colors = IconButtonDefaults.iconButtonColors(
                     contentColor = MaterialTheme.colorScheme.secondary
                 ),
-                onClick = { /* do something */ }
+                onClick = {
+
+
+                }
             ) {
                 Icon(
                     imageVector = Icons.Filled.MoreVert,
@@ -100,4 +108,5 @@ fun TopAppBar() {
         },
         scrollBehavior = scrollBehavior,
     )
+}
 }
