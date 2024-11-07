@@ -25,7 +25,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.coffeeshop.CommentsView
 import com.example.coffeeshops.ui.theme.CoffeeShopsTheme
 
 class MainActivity : ComponentActivity() {

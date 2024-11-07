@@ -1,4 +1,4 @@
-package com.example.coffeeshop
+package com.example.coffeeshops
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
